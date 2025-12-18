@@ -1,5 +1,6 @@
 {
   "name": "boilerpate",
+  "description": "A simple boilerplate package for testing purposes",
   "version": "0.0.1",
   "node_modules": "$PKG_PATH/node_modules",
   "override_env": {
