@@ -1,0 +1,9 @@
+{
+  "name": "boilerpate",
+  "version": "0.0.1",
+  "node_modules": "$PKG_PATH/node_modules",
+  "override_env": {
+    "BOILERPATE_GOOD_JOB": "You did it!"
+  },
+  "ld_library_path": ["$PKG_PATH/lib"]
+}
