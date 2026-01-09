@@ -1,0 +1,99 @@
+{
+  "name": "informix",
+  "description": "informix database connector",
+  "version": "0.0.1",
+  "node_modules": "$PKG_PATH/node_modules",
+  "override_env": {
+    "INFORMIXDIR": "$PKG_PATH/drivers/opt/informix",
+    "USE_ODBC_INFORMIX_DRIVER": true,
+    "ODBCSYSINI": "$PKG_PATH/etc",
+    "INFORMIX_CONNECTIONS": "This is the Plasma config server URL for getting Informix connection configs"
+  },
+  "ld_library_path": ["$PKG_PATH/lib"],
+  "configs" : [
+    {
+      "name": "informix-db-connection",
+      "config_server_path": "/database/informix",
+      "schema": {
+        "name" : {
+            "desc": "The name of the database config",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "host": {
+            "desc": "Hostname",
+            "dataType": "string",
+            "uiType": "input",
+            "default": "localhost",
+            "required": true,
+            "rules": []
+        },
+        "port": {
+            "desc": "Port",
+            "dataType": "integer",
+            "uiType": "number",
+            "default": 1521,
+            "required": true,
+            "rules": [
+              {
+                "type": "min",
+                "value": 1,
+                "err_msg": "Port number must be greater than 1."
+              },
+              {
+                "type": "max",
+                "value": 65535,
+                "err_msg": "Port number must be less than 65535."
+              }
+            ]
+        },
+        "database": {
+            "desc": "Database Name",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "InformixServer": {
+            "desc": "Informix Server Name",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "username": {
+            "desc": "Username",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "password": {
+          "desc": "Database password",
+          "dataType": "string",
+          "uiType": "password",
+          "required": true,
+          "rules": []
+        },
+        "dbLocale": {
+            "desc": "Database Locale",
+            "dataType": "string",
+            "uiType": "input",
+            "default": "en_US.utf8",
+            "required": false,
+            "rules": []
+        },
+        "clientLocale": {
+            "desc": "Client Locale",
+            "dataType": "string",
+            "uiType": "input",
+            "default": "en_US.utf8",
+            "required": false,
+            "rules": []
+        }
+      }
+    }
+  ]
+}

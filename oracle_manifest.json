@@ -1,0 +1,73 @@
+{
+  "name": "oracle",
+  "description": "oracle database connector",
+  "version": "0.0.1",
+  "node_modules": "$PKG_PATH/node_modules",
+  "override_env": {
+    "ORACLE_CONNECTIONS": "This is the Plasma config server URL for getting Oracle connection configs"
+  },
+  "ld_library_path": ["$PKG_PATH/lib"],
+  "configs" : [
+    {
+      "name": "oracle-db-connection",
+      "config_server_path": "/database/oracle",
+      "schema": {
+        "name" : {
+            "desc": "The name of the database config",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "host": {
+            "desc": "Hostname",
+            "dataType": "string",
+            "uiType": "input",
+            "default": "localhost",
+            "required": true,
+            "rules": []
+        },
+        "port": {
+            "desc": "Port",
+            "dataType": "integer",
+            "uiType": "number",
+            "default": 1521,
+            "required": true,
+            "rules": [
+              {
+                "type": "min",
+                "value": 1,
+                "err_msg": "Port number must be greater than 1."
+              },
+              {
+                "type": "max",
+                "value": 65535,
+                "err_msg": "Port number must be less than 65535."
+              }
+            ]
+        },
+        "database": {
+            "desc": "Database Name",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "username": {
+            "desc": "Username",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "password": {
+          "desc": "Database password",
+          "dataType": "string",
+          "uiType": "password",
+          "required": true,
+          "rules": []
+        }
+      }
+    }
+  ]
+}

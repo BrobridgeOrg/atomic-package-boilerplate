@@ -1,0 +1,88 @@
+{
+  "name": "mysql",
+  "description": "mysql database connector",
+  "version": "0.0.1",
+  "node_modules": "$PKG_PATH/node_modules",
+  "override_env": {
+    "MYSQL_CONNECTIONS": "This is the Plasma config server URL for getting MySQL connection configs"
+  },
+  "ld_library_path": ["$PKG_PATH/lib"],
+  "configs" : [
+    {
+      "name": "mysql-db-connection",
+      "config_server_path": "/database/mysql",
+      "schema": {
+        "name" : {
+            "desc": "The name of the database config",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "host": {
+            "desc": "Hostname",
+            "dataType": "string",
+            "uiType": "input",
+            "default": "localhost",
+            "required": true,
+            "rules": []
+        },
+        "port": {
+            "desc": "Port",
+            "dataType": "integer",
+            "uiType": "number",
+            "default": 3306,
+            "required": true,
+            "rules": [
+              {
+                "type": "min",
+                "value": 1,
+                "err_msg": "Port number must be greater than 1."
+              },
+              {
+                "type": "max",
+                "value": 65535,
+                "err_msg": "Port number must be less than 65535."
+              }
+            ]
+        },
+        "database": {
+            "desc": "Database Name",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "username": {
+            "desc": "Username",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "password": {
+          "desc": "Database password",
+          "dataType": "string",
+          "uiType": "password",
+          "required": true,
+          "rules": []
+        },
+        "timezone": {
+            "desc": "Timezone",
+            "dataType": "string",
+            "uiType": "input",
+            "required": false,
+            "rules": []
+        },
+        "charset":{
+              "desc": "Character Set",
+              "dataType": "string",
+              "uiType": "input",
+              "default" : "utf8mb4",
+              "required": false,
+              "rules": []
+        }
+      }
+    }
+  ]
+}

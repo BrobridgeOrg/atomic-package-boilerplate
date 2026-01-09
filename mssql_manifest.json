@@ -1,0 +1,98 @@
+{
+  "name": "mssql",
+  "description": "mssql database connector",
+  "version": "0.0.1",
+  "node_modules": "$PKG_PATH/node_modules",
+  "override_env": {
+    "MSSQL_CONNECTIONS": "This is the Plasma config-server URL for getting MSSQL connection configs"
+  },
+  "ld_library_path": ["$PKG_PATH/lib"],
+  "configs" : [
+    {
+      "name": "mssql-db-connection",
+      "config_server_path": "/database/mssql",
+      "schema": {
+        "name": {
+            "desc": "The name of the database config",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "host": {
+            "desc": "Hostname",
+            "dataType": "string",
+            "uiType": "input",
+            "default": "localhost",
+            "required": true,
+            "rules": []
+        },
+        "port": {
+            "desc": "Port",
+            "dataType": "integer",
+            "uiType": "number",
+            "default": 1433,
+            "required": true,
+            "rules": [
+              {
+                "type": "min",
+                "value": 1,
+                "err_msg": "Port number must be greater than 1."
+              },
+              {
+                "type": "max",
+                "value": 65535,
+                "err_msg": "Port number must be less than 65535."
+              }
+            ]
+        },
+        "database": {
+            "desc": "Database Name",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "domain": {
+            "desc": "Domain Name",
+            "dataType": "string",
+            "uiType": "input",
+            "required": false,
+            "rules": []
+        },
+        "authType": {
+            "desc": "Authentication Type",
+            "dataType": "enum",
+            "uiType": "select",
+            "default": "default",
+            "required": true,
+            "options": [
+              { "label": "default", "value": "default" }
+            ]
+        },
+        "username": {
+            "desc": "Username",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": []
+        },
+        "password": {
+          "desc": "Database password",
+          "dataType": "string",
+          "uiType": "password",
+          "required": true,
+          "rules": []
+        },
+        "appName" : {
+            "desc": "Application Name",
+            "dataType": "string",
+            "uiType": "input",
+            "required": false,
+            "default": "atomic",
+            "rules": []
+        }
+      }
+    }
+  ]
+}
