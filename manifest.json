@@ -6,5 +6,73 @@
   "override_env": {
     "BOILERPATE_GOOD_JOB": "You did it!"
   },
-  "ld_library_path": ["$PKG_PATH/lib"]
+  "ld_library_path": ["$PKG_PATH/lib"],
+  "configs" : [
+    {
+      "name": "boilerpate-config",
+      "config_server_path": "This is the request path to get schemas",
+      "schema": {
+        "type": {
+            "desc": "Type of database",
+            "dataType": "enum",
+            "uiType": "select",
+            "required": true,
+            "options": [
+              { "label": "oracle", "value": "oracle" },
+              { "label": "informix", "value": "informix" },
+              { "label": "mssql", "value": "mssql" },
+              { "label": "mysql", "value": "mysql" },
+              { "label": "postgresql", "value": "postgresql" }
+            ]
+        },
+        "encrypted": {
+            "desc": "Is the password encrypted?",
+            "dataType": "boolean",
+            "uiType": "checkbox",
+            "default": false,
+            "required": true,
+            "rules": []
+        },
+        "connectionTimeout": {
+            "desc": "Connection timeout in seconds",
+            "dataType": "integer",
+            "uiType": "number",
+            "default": 30,
+            "required": true,
+            "rules": [
+              {
+                "type": "min",
+                "value": 1,
+                "err_msg": "Timeout must be at least 1 second"
+              },
+              {
+                "type": "max",
+                "value": 300,
+                "err_msg": "Timeout cannot exceed 300 seconds"
+              }
+            ]
+        },
+        "path" : {
+            "desc": "path to save",
+            "dataType": "string",
+            "uiType": "input",
+            "required": true,
+            "rules": [
+              {
+                "type": "regex",
+                "value": "^/([a-zA-Z0-9_\\-]+/)*[a-zA-Z0-9_\\-]+$",
+                "err_msg": "Path must start with / and can only contain alphanumeric characters, underscores, hyphens, and slashes."
+              }
+            ]
+        },
+        "password": {
+          "desc": "Database password",
+          "dataType": "string",
+          "uiType": "password",
+          "required": true,
+          "rules": []
+        }
+      }
+    }
+  ]
 }
