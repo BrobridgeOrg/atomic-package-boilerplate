@@ -30,6 +30,7 @@
 | `desc` | 設定項目的用途說明 |
 | `config_server_path` | 其他服務取得此設定資料的 API 路徑 |
 | `schema` | 可設定的欄位定義（詳見下方說明） |
+| `schema_order` | 指定 schema 欄位的顯示順序（詳見下方說明） |
 
 **範例：**
 ```json
@@ -37,6 +38,7 @@
     "name": "database_config",
     "desc": "資料庫連線設定",
     "config_server_path": "/api/config/database",
+    "schema_order": ["type", "host", "port", "password"],
     "schema": {
         // 欄位定義
     }
@@ -47,10 +49,25 @@
 
 ## 三、Schema 欄位定義
 
-### 3.1 什麼是 Schema？
+### 3.1 schema_order（欄位顯示順序）
+
+`schema_order` 是一個字串陣列，明確指定 `schema` 內欄位在 UI 上的排列順序。由於 JSON 物件的 key 順序不保證，請使用此欄位來控制表單欄位的呈現順序。
+
+- 陣列中的每個字串對應 `schema` 的一個欄位名稱
+- 未列出的欄位將排列在最後
+- 若省略 `schema_order`，欄位顯示順序依 `schema` 定義為準
+
+**範例：**
+```json
+"schema_order": ["type", "host", "port", "password", "encrypted"]
+```
+
+---
+
+### 3.2 什麼是 Schema？
 Schema 定義了前端設定頁面的表單欄位，系統會根據 schema 自動生成對應的 UI 元件，讓使用者輸入並儲存設定。
 
-### 3.2 Schema 欄位結構
+### 3.3 Schema 欄位結構
 
 每個欄位包含以下屬性：
 
@@ -72,7 +89,7 @@ Schema 定義了前端設定頁面的表單欄位，系統會根據 schema 自�
 }
 ```
 
-### 3.3 支援的資料型態 (dataType)
+### 3.4 支援的資料型態 (dataType)
 
 | dataType | 說明 |
 |----------|------|
@@ -82,7 +99,7 @@ Schema 定義了前端設定頁面的表單欄位，系統會根據 schema 自�
 | `enum` | 列舉（從選項中選擇） |
 | `array` | 陣列 |
 
-### 3.4 支援的 UI 元件 (uiType)
+### 3.5 支援的 UI 元件 (uiType)
 
 | uiType | 說明 | 適用 dataType |
 |--------|------|---------------|
@@ -95,7 +112,7 @@ Schema 定義了前端設定頁面的表單欄位，系統會根據 schema 自�
 | `checkbox` | 勾選框 | boolean |
 | `radio` | 單選按鈕 | enum |
 
-### 3.5 支援的驗證規則 (rules)
+### 3.6 支援的驗證規則 (rules)
 
 | rule | 說明 | 範例 |
 |------|------|------|

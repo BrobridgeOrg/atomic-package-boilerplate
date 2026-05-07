@@ -11,6 +11,7 @@
     {
       "name": "boilerpate-config",
       "config_server_path": "This is the request path to get schemas",
+      "schema_order": ["type", "encrypted", "connectionTimeout", "path", "password"],
       "schema": {
         "type": {
             "desc": "Type of database",
